@@ -1,0 +1,21 @@
+# .NET / C# Backend
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+*.dbmdl
+*.jfm
+appsettings.Development.json
+
+# Angular Frontend
+node_modules/
+dist/
+.angular/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
