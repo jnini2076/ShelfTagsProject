@@ -1,11 +1,11 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ShelfTagsBE.Models;
+namespace ShelfTagsBE.Dto;
 
-public class Product
-{   
-   
+public class ProductDTO
+{
+    
     public  int Id {get;set;}
     
     [Required]

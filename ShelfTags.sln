@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShelfTagsBE", "ShelfTagsBE\ShelfTagsBE.csproj", "{ED0CC7C2-69DD-4564-AA4F-588D8EB63162}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShelfTagsBE.Tests", "ShelfTagsBE.Tests\ShelfTagsBE.Tests.csproj", "{5C076835-BE2E-4274-BDB0-6BE1D25292E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED0CC7C2-69DD-4564-AA4F-588D8EB63162}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED0CC7C2-69DD-4564-AA4F-588D8EB63162}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED0CC7C2-69DD-4564-AA4F-588D8EB63162}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED0CC7C2-69DD-4564-AA4F-588D8EB63162}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C076835-BE2E-4274-BDB0-6BE1D25292E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C076835-BE2E-4274-BDB0-6BE1D25292E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C076835-BE2E-4274-BDB0-6BE1D25292E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C076835-BE2E-4274-BDB0-6BE1D25292E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
