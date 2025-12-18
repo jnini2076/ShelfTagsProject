@@ -26,6 +26,8 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddMemoryCache();
+
 // Add the DbContext with SQL Server
 builder.Services.AddDbContext<DBmodel>(options =>
     options.UseSqlServer(

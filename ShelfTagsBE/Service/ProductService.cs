@@ -1,4 +1,5 @@
 using System;
+using Microsoft.Extensions.Caching.Memory;
 using ShelfTagsBE.Models;
 using ShelfTagsBE.Repos;
 
@@ -8,11 +9,13 @@ public class ProductService
 {
     private readonly IProductInterface productRepository;
     private readonly ILogger<ProductService> logger;
+    private readonly IMemoryCache cache;
 
-    public ProductService(IProductInterface productRepository, ILogger<ProductService> logger)
+    public ProductService(IProductInterface productRepository, ILogger<ProductService> logger, IMemoryCache cache)
     {
         this.productRepository = productRepository;
         this.logger = logger;
+        this.cache = cache;
     }
 
     public async Task<Product> PostProduct(Product product)
@@ -58,12 +61,35 @@ public class ProductService
 
     public async Task<Product?> GetProductbyName(string productName)
     {
+            var cacheKey = $"{productName}";
+
+            if(cache.TryGetValue(cacheKey, out Product? cachedProduct))
+            {
+                 logger.LogInformation($"cache hit for product: {productName}");
+                    return cachedProduct;
+                 
+            }
+
+            logger.LogInformation($"cache missed for product  {productName}");
+
+            
+
+
+
+
         var getProduct = await productRepository.GetProductAsync(productName);
+
         if (getProduct == null)
         {
             logger.LogWarning("cant find that specific product");
             throw new InvalidOperationException("cant find the product");
         }
+        var cacheOptions = new MemoryCacheEntryOptions 
+        {
+            AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(7)
+        };
+        cache.Set(cacheKey, getProduct, cacheOptions);
+
         logger.LogInformation("we have retrieved the product by the specific name ");
         return getProduct;
     }
