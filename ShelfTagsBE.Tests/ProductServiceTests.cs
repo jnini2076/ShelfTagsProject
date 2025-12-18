@@ -5,6 +5,7 @@ using ShelfTagsBE.Repos;
 using ShelfTagsBE.Models;
 using ShelfTagsBE.Data;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace ShelfTagsBE.Tests;
 
@@ -21,6 +22,9 @@ public class ProductServiceTests
         
         // Create a fake logger (mock)
         var mockLogger = new Mock<ILogger<ProductService>>();
+
+        // Create a fake cache (mock)
+        var mockCache = new Mock<IMemoryCache>();
         
         // Create a new product to be created
         var newProduct = new Product
@@ -53,7 +57,8 @@ public class ProductServiceTests
         // Create the service with our mocks (NO CONTEXT!)
         var service = new ProductService(
             mockRepository.Object,
-            mockLogger.Object
+            mockLogger.Object,
+            mockCache.Object
         );
         
         // ACT - Call the method we're testing
@@ -78,6 +83,7 @@ public class ProductServiceTests
         // ARRANGE
         var mockRepository = new Mock<IProductInterface>();
         var mockLogger = new Mock<ILogger<ProductService>>();
+        var mockCache = new Mock<IMemoryCache>();
         
         // Create a product that already exists (duplicate)
         var existingProduct = new Product
@@ -100,7 +106,8 @@ public class ProductServiceTests
         
         var service = new ProductService(
             mockRepository.Object,
-            mockLogger.Object
+            mockLogger.Object,
+            mockCache.Object
         );
         
         // Create a new product with the same name
@@ -138,6 +145,7 @@ public class ProductServiceTests
         // ARRANGE
         var mockRepository = new Mock<IProductInterface>();
         var mockLogger = new Mock<ILogger<ProductService>>();
+        var mockCache = new Mock<IMemoryCache>();
         
         var existingProduct = new Product
         {
@@ -164,7 +172,8 @@ public class ProductServiceTests
         
         var service = new ProductService(
             mockRepository.Object,
-            mockLogger.Object
+            mockLogger.Object,
+            mockCache.Object
         );
         
         var newProduct = new Product
