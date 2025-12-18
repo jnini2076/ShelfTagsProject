@@ -1,0 +1,44 @@
+<header>
+  <div class="justify-center flex">
+    <h3 class="text-blue-600 font-bold text-2xl mr-32">ShelfTag</h3>
+  </div>
+
+  <div
+    class="justify-center flex flex-row mt-2 text-black font-bold gap-3 text-md"
+  >
+    <button
+      routerLink=""
+      (click)="setActiveButton('home')"
+      [ngClass]="{
+        'bg-black text-white': activeButton === 'home',
+        'hover:bg-slate-300 text-black': activeButton !== 'home'
+      }"
+      class="rounded-md p-1 m-1"
+    >
+      Home
+    </button>
+    <button
+      routerLink="admin"
+      (click)="setActiveButton('admin')"
+      [ngClass]="{
+        'bg-black text-white': activeButton === 'admin',
+        'hover:bg-slate-300 text-black': activeButton !== 'admin'
+      }"
+      class="rounded-md p-1 m-1"
+    >
+      Admin
+    </button>
+    <button
+      routerLink="products"
+      (click)="setActiveButton('products')"
+      [ngClass]="{
+        'bg-black text-white': activeButton === 'products',
+        'hover:bg-slate-300 text-black': activeButton !== 'products'
+      }"
+      class="rounded-md p-1 m-1"
+    >
+      Products
+    </button>
+  </div>
+  <hr class="border-gray-200 mt-3" />
+</header>
