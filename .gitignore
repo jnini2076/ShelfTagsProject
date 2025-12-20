@@ -8,6 +8,7 @@ obj/
 .vs/
 *.dbmdl
 *.jfm
+appsettings.json
 appsettings.Development.json
 
 # Angular Frontend
