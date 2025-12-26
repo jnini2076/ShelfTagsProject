@@ -7,7 +7,7 @@ namespace ShelfTagsBE.Repos;
 
 public class ProductRepository(DBmodel context) : IProductInterface
 {
-    private readonly DBmodel context = context;
+   
 
     public async Task<List<Product>> GetAllProductsAsync()
     {

@@ -13,4 +13,6 @@ namespace ShelfTagsBE.Data;
         public DbSet<PrintTemplate> PrintTemplates {get;set;}
         public DbSet<Product> Products {get;set;}
         public DbSet<ShelfTag> ShelfTags {get;set;}
+
+        public DbSet<Account> Accounts {get;set;}
 }
