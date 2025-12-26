@@ -3,8 +3,32 @@ using ShelfTagsBE.Repos;
 using Microsoft.EntityFrameworkCore;
 using ShelfTagsBE.Service;
 using Serilog;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+var jwtKey = builder.Configuration["Jwt:Key"];
+builder.Services.AddSingleton(new JwtService(jwtKey));
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtKey))
+    };
+});
 
 // Configure Serilog before building the app
 Log.Logger = new LoggerConfiguration()
@@ -19,7 +43,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular", policy =>
     {
-        policy.WithOrigins("https://localhost4200", "https://localhost4200")
+        policy.WithOrigins("http://localhost:5011", "https://localhost:4200")
         .AllowAnyHeader()
         .AllowAnyMethod()
         .AllowCredentials();
@@ -39,6 +63,8 @@ builder.Services.AddScoped<IProductInterface, ProductRepository>();
 builder.Services.AddScoped<IShelfTagInterface, ShelfTagRepository>();
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<ShelfTagService>();
+builder.Services.AddScoped<IAccountInterface, AccountRepository>();
+builder.Services.AddScoped<AccountService>();
 
 // Add controllers
 builder.Services.AddControllers();
@@ -55,15 +81,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+   
 
-app.UseHttpsRedirection();
 
-// Enable CORS
 app.UseCors("AllowAngular");
-
-// Map controller routes
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
-
 app.Run();
+
 
 
